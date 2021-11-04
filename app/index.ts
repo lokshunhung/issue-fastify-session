@@ -1,7 +1,8 @@
 
+import fastifySession from '@fastify/session'
+
 import Fastify        from 'fastify'
 import FastifyCookie  from 'fastify-cookie'
-import fastifySession from '@fastify/session'
 
 const app = Fastify()
 
