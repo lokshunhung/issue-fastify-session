@@ -4,10 +4,28 @@ import fastifySession from '@fastify/session'
 import Fastify        from 'fastify'
 import FastifyCookie  from 'fastify-cookie'
 
+import Redis from 'ioredis'
+import ConnectRedis from 'connect-redis'
+
 const app = Fastify()
 
 app.register(FastifyCookie)
-app.register(fastifySession)
+
+const client = new Redis({
+  host: '127.0.0.1',
+  port: 6379,
+})
+
+const redisStore = ConnectRedis(fastifySession as any)
+
+app.register(fastifySession, {
+  store: new redisStore({
+    client,
+    host: '127.0.0.1',
+    port: 6379,
+  }), // "as any" to avoid error.
+  secret: 'the-secret',
+})
 
 ;(async () => {
 
