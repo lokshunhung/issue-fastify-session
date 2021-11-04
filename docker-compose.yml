@@ -1,0 +1,9 @@
+
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./app:/srv/app
+    working_dir: /srv/app
