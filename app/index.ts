@@ -16,14 +16,14 @@ const client = new Redis({
   port: 6379,
 })
 
-const redisStore = ConnectRedis(fastifySession as any)
+const redisStore = ConnectRedis(fastifySession)
 
 app.register(fastifySession, {
   store: new redisStore({
     client,
     host: '127.0.0.1',
     port: 6379,
-  }), // "as any" to avoid error.
+  }),
   secret: 'the-secret',
 })
 
